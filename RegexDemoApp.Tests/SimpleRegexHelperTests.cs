@@ -39,4 +39,21 @@ public  class SimpleRegexHelperTests
         Assert.Equal(expect, SimpleRegexHelper.StartsWithCapitalLetter(input));
     }
 
+    [Theory]
+    [InlineData("A65 F4E2", true)]
+    [InlineData("D02 X285", true)]
+    [InlineData("123 4567", true)]
+    [InlineData("A6 F4E2", false)]      // Too short before space
+    [InlineData("A65F4E2", false)]      // Missing space
+    [InlineData("A65  F4E2", false)]    // Extra space
+    [InlineData("A65 F4E", false)]      // Too short after space
+    [InlineData("A65 F4E22", false)]    // Too long after space
+    [InlineData("", false)]             // Empty string
+    [InlineData("   ", false)]          // Only spaces
+    public void IsValidEirCode_ShouldMatchExpected(string input, bool expected)
+    {
+        bool result = SimpleRegexHelper.IsValidEirCode(input);
+        Assert.Equal(expected, result);
+    }
+
 }

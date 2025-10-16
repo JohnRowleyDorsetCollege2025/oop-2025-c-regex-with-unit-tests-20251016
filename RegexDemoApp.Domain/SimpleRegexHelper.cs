@@ -28,6 +28,6 @@ public static class SimpleRegexHelper
 
     public static bool IsValidEirCode(string input)
     {
-        return false;
+        return Regex.IsMatch(input, @"^.{3}\s.{4}$");
     }
 }
